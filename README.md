@@ -24,6 +24,8 @@
 Los circuitos digitales, a no ser que sean asíncronos, van comandados por un reloj cuya frecuencia puede variar según el tipo de sistema digital del que se trate. Desde microprocesador 6502 que funcionaba con un reloj de 1Mhz hasta los actuales, que funcionan en el orden de los gigahercios, no han pasado ni cuatro décadas. En un sistema digital complejo es habitual que necesitemos obtener diferentes frecuencias de reloj para diferentes subsistemas. Un ejemplo muy claro puede ser el de un reloj digital que tiene que contar los segundos, por lo tanto, necesita un reloj de 1Hz (un pulso por segundo). En este artículo vamos a ver un ejemplo práctico de cómo obtener un reloj de 1Hz a partir de otro de 50Mhz en VHDL, y vamos a probarlo un una FPGA.
 
 La técnica usada para dividir la frecuencia de un reloj es usar biestables conectados en cascada. En el siguiente esquema se detalla el funcionamiento.
+
+![Arquitectura ALU](/Img/Imagen1.png)
  
 Cada biestable divide la frecuencia a la mitad, así que la idea es ir acoplando biestables hasta obtener la frecuencia deseada. En la práctica pueden usarse contadores integrados como el 7493. En una FPGA podemos conseguir el mismo efecto usando un contador, aunque la mayoría ya trae circuitos especializados para ello, vamos a ver cómo se hace en VHDL.
 
@@ -519,6 +521,9 @@ NET "SW(6)" LOC = H13;
 -	RET
 ```
    - Diagrama RTL
+
+![Arquitectura ALU](/Img/Imagen2.png)
+
 ## CONCLUSIONES<a name="id4"></a>
 
 Las interrupciones fueron muy útiles ya que lo que se necesitaba era realizar varios procesos en un segundo sin tener que contar un segundo en el programa principal. También se aprendió a poner un modo de espera para poder capturar los flancos de subida del divisor de frecuencia.
